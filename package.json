@@ -21,7 +21,7 @@
   "homepage": "https://github.com/chadjcampbell/battleshipJS#readme",
   "devDependencies": {
     "@babel/core": "^7.19.1",
-    "@babel/preset-env": "^7.19.1",
+    "@babel/preset-env": "^7.19.4",
     "babel-jest": "^29.2.0",
     "babel-loader": "^8.2.5",
     "css-loader": "^6.7.1",

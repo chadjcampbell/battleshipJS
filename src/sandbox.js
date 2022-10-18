@@ -56,10 +56,32 @@ class Gameboard {
     )
   }
   receiveAttack(coordinates) {
-    if (this.findCell(coordinates).beenHit === true) return
+    if (this.findCell(coordinates).beenHit === true) return false
     this.findCell(coordinates).beenHit === true
     if (this.findCell(coordinates).occupied !== null)
       this.findCell(coordinates).occupied.hit()
+  }
+}
+
+class Player {
+  constructor(name = 'Computer') {
+    this.name = name
+    this.board = new Gameboard()
+    this.carrier = new Ship(5)
+    this.battleship = new Ship(4)
+    this.destroyer = new Ship(3)
+    this.submarine = new Ship(3)
+    this.patrolBoat = new Ship(2)
+  }
+  randomPlacement() {
+    if (this.board.validPlacement(this.randomXY(), this.carrier)) {
+      this.board.placeShip(this.randomXY(), this.carrier)
+    }
+  }
+  randomXY(min = 0, max = 9) {
+    const randomX = Math.floor(Math.random() * (max - min + 1) + min)
+    const randomY = Math.floor(Math.random() * (max - min + 1) + min)
+    return [randomX, randomY]
   }
 }
 
@@ -73,3 +95,9 @@ console.log(testBoard.findCell([1, 4]))
 console.log(testBoard.validPlacement([1, 4], testShip))
 testBoard.receiveAttack([1, 4])
 console.log(testShip)
+
+const testPlayer = new Player()
+
+testPlayer.randomPlacement()
+console.log(testPlayer.board)
+console.log()

@@ -26,13 +26,16 @@ class Gameboard {
   }
   validPlacement(coordinates, ship) {
     for (let i = 0; i < ship.length; i++) {
-      if (this[this.coordinatesConverter(coordinates) + i].occupied) {
+      coordinates[0] = coordinates[0 + i]
+      if (this.findCell(coordinates).occupied) {
         return false
       }
     }
   }
-  coordinatesConverter(coordinates) {
-    return coordinates.join(',')
+  findCell(coordinates) {
+    return this.find(
+      (obj) => obj.x === coordinates[0] && obj.y === coordinates[1]
+    )
   }
 }
 

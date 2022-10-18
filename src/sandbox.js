@@ -64,24 +64,34 @@ class Gameboard {
 }
 
 class Player {
-  constructor(name = 'Computer') {
+  constructor(
+    name = 'Computer',
+    board = new Gameboard(),
+    carrier = new Ship(5),
+    battleship = new Ship(4),
+    destroyer = new Ship(3),
+    submarine = new Ship(3),
+    patrolBoat = new Ship(2)
+  ) {
     this.name = name
-    this.board = new Gameboard()
-    this.carrier = new Ship(5)
-    this.battleship = new Ship(4)
-    this.destroyer = new Ship(3)
-    this.submarine = new Ship(3)
-    this.patrolBoat = new Ship(2)
+    this.board = board
+    this.carrier = carrier
+    this.battleship = battleship
+    this.destroyer = destroyer
+    this.submarine = submarine
+    this.patrolBoat = patrolBoat
   }
   randomPlacement() {
-    if (this.board.validPlacement(this.randomXY(), this.carrier)) {
-      this.board.placeShip(this.randomXY(), this.carrier)
-    }
+    let random = this.randomXY()
+    this.board.placeShip(random, this.carrier)
   }
-  randomXY(min = 0, max = 9) {
-    const randomX = Math.floor(Math.random() * (max - min + 1) + min)
-    const randomY = Math.floor(Math.random() * (max - min + 1) + min)
-    return [randomX, randomY]
+  randomXY() {
+    let arr = []
+    const randomX = Math.floor(Math.random() * 9)
+    const randomY = Math.floor(Math.random() * 9)
+    arr.push(randomX)
+    arr.push(randomY)
+    return arr
   }
 }
 
@@ -99,5 +109,6 @@ console.log(testShip)
 const testPlayer = new Player()
 
 testPlayer.randomPlacement()
+
 console.log(testPlayer.board)
-console.log()
+console.log(testPlayer.randomXY())

@@ -55,15 +55,21 @@ class Gameboard {
       (obj) => obj.x === coordinates[0] && obj.y === coordinates[1]
     )
   }
+  receiveAttack(coordinates) {
+    if (this.findCell(coordinates).beenHit === true) return
+    this.findCell(coordinates).beenHit === true
+    if (this.findCell(coordinates).occupied !== null)
+      this.findCell(coordinates).occupied.hit()
+  }
 }
 
 const testBoard = new Gameboard()
 const testShip = new Ship(3)
 
 console.log(testBoard.validPlacement([1, 4], testShip))
-
 testBoard.placeShip([1, 4], testShip)
-
 console.log(testShip.length)
 console.log(testBoard.findCell([1, 4]))
 console.log(testBoard.validPlacement([1, 4], testShip))
+testBoard.receiveAttack([1, 4])
+console.log(testShip)

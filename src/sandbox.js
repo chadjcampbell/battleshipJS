@@ -67,19 +67,35 @@ class Gameboard {
   }
   receiveAttack(coordinates) {
     if (this.findCell(coordinates).beenHit === true) return false
-    this.findCell(coordinates).beenHit === true
+    this.findCell(coordinates).beenHit = true
     if (this.findCell(coordinates).occupied !== null)
       this.findCell(coordinates).occupied.hit()
   }
 }
 
+class Player {
+  constructor(name = 'Computer') {
+    this.name = name
+  }
+  randomAttack(gameBoard) {
+    gameBoard.receiveAttack(this.randomXY())
+  }
+  randomXY(min = 0, max = 9) {
+    const randomX = Math.floor(Math.random() * (max - min + 1) + min)
+    const randomY = Math.floor(Math.random() * (max - min + 1) + min)
+    return [randomX, randomY]
+  }
+}
+
+const testPlayer = new Player()
 const testBoard = new Gameboard()
 const testShip = new Ship(3)
 
 console.log(testBoard.validPlacement([1, 4], testShip))
 testBoard.placeShip([1, 4], testShip)
 console.log(testShip.length)
-console.log(testBoard.findCell([3, 4]))
+console.log(testBoard.findCell([1, 4]))
 console.log(testBoard.validPlacement([1, 4], testShip))
 testBoard.receiveAttack([1, 4])
 console.log(testShip)
+console.log(testPlayer.randomAttack(testBoard))

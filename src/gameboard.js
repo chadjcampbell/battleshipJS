@@ -1,3 +1,5 @@
+import { Ship } from './ship'
+
 class Cell {
   constructor(x, y, occupied = null, beenHit = false) {
     this.x = x
@@ -9,18 +11,28 @@ class Cell {
 
 class Gameboard {
   constructor() {
-    this.gameBoard = []
+    this.gameBoard = this.gameBoard || this.makeGameboard()
+    this.carrier = this.carrier || new Ship(5)
+    this.battleship = this.battleship || new Ship(4)
+    this.destroyer = this.destroyer || new Ship(3)
+    this.submarine = this.submarine || new Ship(3)
+    this.patrolBoat = this.patrolBoat || new Ship(2)
+  }
+
+  makeGameboard() {
+    let gameBoard = []
     for (let i = 0; i < 10; i++) {
       for (let j = 0; j < 10; j++) {
-        this.gameBoard.push(new Cell(i, j))
+        gameBoard.push(new Cell(i, j))
       }
     }
+    return gameBoard
   }
   placeShip(coordinates, ship) {
     if (this.validPlacement(coordinates, ship)) {
       for (let i = 0; i < ship.length; i++) {
-        coordinates[0] = coordinates[0] + i
-        this.findCell(coordinates).occupied = ship
+        let tempCoords = [coordinates[0] + i, coordinates[1]]
+        this.findCell(tempCoords).occupied = ship
       }
     }
   }
@@ -42,7 +54,7 @@ class Gameboard {
     )
   }
   receiveAttack(coordinates) {
-    if (this.findCell(coordinates).beenHit === true) return
+    if (this.findCell(coordinates).beenHit === true) return false
     this.findCell(coordinates).beenHit === true
     if (this.findCell(coordinates).occupied !== null)
       this.findCell(coordinates).occupied.hit()

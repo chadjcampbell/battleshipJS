@@ -23,18 +23,28 @@ class Cell {
 
 class Gameboard {
   constructor() {
-    this.gameBoard = []
+    this.gameBoard = this.gameBoard || this.makeGameboard()
+    this.carrier = this.carrier || new Ship(5)
+    this.battleship = this.battleship || new Ship(4)
+    this.destroyer = this.destroyer || new Ship(3)
+    this.submarine = this.submarine || new Ship(3)
+    this.patrolBoat = this.patrolBoat || new Ship(2)
+  }
+
+  makeGameboard() {
+    let gameBoard = []
     for (let i = 0; i < 10; i++) {
       for (let j = 0; j < 10; j++) {
-        this.gameBoard.push(new Cell(i, j))
+        gameBoard.push(new Cell(i, j))
       }
     }
+    return gameBoard
   }
   placeShip(coordinates, ship) {
     if (this.validPlacement(coordinates, ship)) {
       for (let i = 0; i < ship.length; i++) {
-        coordinates[0] = coordinates[0] + i
-        this.findCell(coordinates).occupied = ship
+        let tempCoords = [coordinates[0] + i, coordinates[1]]
+        this.findCell(tempCoords).occupied = ship
       }
     }
   }
@@ -63,52 +73,13 @@ class Gameboard {
   }
 }
 
-class Player {
-  constructor(
-    name = 'Computer',
-    board = new Gameboard(),
-    carrier = new Ship(5),
-    battleship = new Ship(4),
-    destroyer = new Ship(3),
-    submarine = new Ship(3),
-    patrolBoat = new Ship(2)
-  ) {
-    this.name = name
-    this.board = board
-    this.carrier = carrier
-    this.battleship = battleship
-    this.destroyer = destroyer
-    this.submarine = submarine
-    this.patrolBoat = patrolBoat
-  }
-  randomPlacement() {
-    let random = this.randomXY()
-    this.board.placeShip(random, this.carrier)
-  }
-  randomXY() {
-    let arr = []
-    const randomX = Math.floor(Math.random() * 9)
-    const randomY = Math.floor(Math.random() * 9)
-    arr.push(randomX)
-    arr.push(randomY)
-    return arr
-  }
-}
-
 const testBoard = new Gameboard()
 const testShip = new Ship(3)
 
 console.log(testBoard.validPlacement([1, 4], testShip))
 testBoard.placeShip([1, 4], testShip)
 console.log(testShip.length)
-console.log(testBoard.findCell([1, 4]))
+console.log(testBoard.findCell([3, 4]))
 console.log(testBoard.validPlacement([1, 4], testShip))
 testBoard.receiveAttack([1, 4])
 console.log(testShip)
-
-const testPlayer = new Player()
-
-testPlayer.randomPlacement()
-
-console.log(testPlayer.board)
-console.log(testPlayer.randomXY())

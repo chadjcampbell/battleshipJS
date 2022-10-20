@@ -10,8 +10,8 @@ testBoard.placeShip([1, 4], testShip)
 for (let i = 0; i < 100 ; i++) {
     testPlayer.randomAttack(testBoard)
   }
-test('100 random attacks, all cells hit?', (gameBoard) => {
+test('100 random attacks, all cells hit?', (testBoard) => {
     for (let i = 0; i < 100; i++) {
-        expect(gameBoard[i].beenHit).toBe(true)
+        expect(testBoard[i].beenHit).toBe(true)
     }
 });

@@ -103,3 +103,4 @@ for (let i = 0; i < 100 ; i++) {
     testPlayer.randomAttack(testBoard)
   }
 console.log(testBoard)
+console.log(testShip.isSunk())

@@ -55,7 +55,7 @@ class Gameboard {
   }
   receiveAttack(coordinates) {
     if (this.findCell(coordinates).beenHit === true) return false
-    this.findCell(coordinates).beenHit === true
+    this.findCell(coordinates).beenHit = true
     if (this.findCell(coordinates).occupied !== null)
       this.findCell(coordinates).occupied.hit()
   }

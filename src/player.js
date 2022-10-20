@@ -3,7 +3,14 @@ class Player {
     this.name = name
   }
   randomAttack(gameBoard) {
-    gameBoard.receiveAttack(this.randomXY())
+    let randomCell = gameBoard.findCell(this.randomXY())
+    if(randomCell.beenHit == false) {
+      randomCell.beenHit = true
+      if (randomCell.occupied !== null) {
+      randomCell.occupied.hit()}
+    } else {
+      this.randomAttack(gameBoard)
+    }
   }
   randomXY(min = 0, max = 9) {
     const randomX = Math.floor(Math.random() * (max - min + 1) + min)

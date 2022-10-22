@@ -59,6 +59,18 @@ class Gameboard {
     if (this.findCell(coordinates).occupied !== null)
       this.findCell(coordinates).occupied.hit()
   }
+  fleetSunk() {
+    if (
+      this.carrier.isSunk() &&
+      this.battleship.isSunk() &&
+      this.destroyer.isSunk() &&
+      this.submarine.isSunk() &&
+      this.patrolBoat.isSunk()
+    ) {
+      return true
+    }
+    return false
+  }
 }
 
 export { Gameboard }

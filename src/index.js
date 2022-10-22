@@ -12,11 +12,19 @@ const computerDisplay = document.querySelector('#computerdisplay')
 playerBoard.gameBoard.forEach((cell) => {
   const cellDiv = document.createElement('div')
   cellDiv.classList.add('cell')
+  cellDiv.dataset.x = cell.x
+  cellDiv.dataset.y = cell.y
+  cellDiv.dataset.occupied = cell.occupied
+  cellDiv.dataset.beenHit = cell.beenHit
   playerDisplay.appendChild(cellDiv)
 })
 
 computerBoard.gameBoard.forEach((cell) => {
   const cellDiv = document.createElement('div')
   cellDiv.classList.add('cell')
+  cellDiv.dataset.x = cell.x
+  cellDiv.dataset.y = cell.y
+  cellDiv.dataset.occupied = cell.occupied
+  cellDiv.dataset.beenHit = cell.beenHit
   computerDisplay.appendChild(cellDiv)
 })

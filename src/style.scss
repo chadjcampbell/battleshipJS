@@ -73,4 +73,10 @@ footer {
   width: 30px;
   height: 30px;
   background-color: rgb(71, 243, 255);
+  border-radius: 2px;
+}
+
+.cell:hover {
+  transform: scale(1.1);
+  cursor: pointer;
 }

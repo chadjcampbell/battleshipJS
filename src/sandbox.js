@@ -109,11 +109,13 @@ class Player {
 
 const testPlayer = new Player()
 const testBoard = new Gameboard()
-const testShip = new Ship(3)
-
-testBoard.placeShip([1, 4], testBoard.carrier)
+testBoard.placeShip([1, 1], testBoard.carrier)
+testBoard.placeShip([1, 2], testBoard.battleship)
+testBoard.placeShip([1, 3], testBoard.destroyer)
+testBoard.placeShip([1, 4], testBoard.submarine)
+testBoard.placeShip([1, 5], testBoard.patrolBoat)
 for (let i = 0; i < 100; i++) {
   testPlayer.randomAttack(testBoard)
 }
-console.log(testBoard.gameBoard[1].beenHit)
-console.log(testShip.isSunk())
+
+console.log(testBoard)

@@ -4,10 +4,11 @@ class Player {
   }
   randomAttack(gameBoard) {
     let randomCell = gameBoard.findCell(this.randomXY())
-    if(randomCell.beenHit == false) {
+    if (randomCell.beenHit == false) {
       randomCell.beenHit = true
       if (randomCell.occupied !== null) {
-      randomCell.occupied.hit()}
+        randomCell.occupied.hit()
+      }
     } else {
       this.randomAttack(gameBoard)
     }

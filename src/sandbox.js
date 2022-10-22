@@ -79,10 +79,11 @@ class Player {
   }
   randomAttack(gameBoard) {
     let randomCell = gameBoard.findCell(this.randomXY())
-    if(randomCell.beenHit == false) {
+    if (randomCell.beenHit == false) {
       randomCell.beenHit = true
       if (randomCell.occupied !== null) {
-      randomCell.occupied.hit()}
+        randomCell.occupied.hit()
+      }
     } else {
       this.randomAttack(gameBoard)
     }
@@ -98,9 +99,9 @@ const testPlayer = new Player()
 const testBoard = new Gameboard()
 const testShip = new Ship(3)
 
-testBoard.placeShip([1, 4], testShip)
-for (let i = 0; i < 100 ; i++) {
-    testPlayer.randomAttack(testBoard)
-  }
-console.log(testBoard)
+testBoard.placeShip([1, 4], testBoard.carrier)
+for (let i = 0; i < 100; i++) {
+  testPlayer.randomAttack(testBoard)
+}
+console.log(testBoard.gameBoard[1].beenHit)
 console.log(testShip.isSunk())

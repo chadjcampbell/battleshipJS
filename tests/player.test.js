@@ -1,6 +1,6 @@
-import { Ship } from './ship'
-import { Gameboard } from './gameboard'
-import { Player } from './player'
+import { Ship } from '../src/ship'
+import { Gameboard } from '../src/gameboard'
+import { Player } from '../src/player'
 
 const testPlayer = new Player()
 const testBoard = new Gameboard()

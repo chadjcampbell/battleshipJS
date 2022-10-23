@@ -1,4 +1,4 @@
-import { Ship } from './ship'
+import { Ship } from '../src/ship'
 
 test('Will the ship float and sink?', () => {
   const testShip = new Ship(3)

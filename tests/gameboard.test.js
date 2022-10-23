@@ -1,6 +1,6 @@
-import { Gameboard } from './gameboard'
-import { Ship } from './ship'
-import { Player } from './player'
+import { Gameboard } from '../src/gameboard'
+import { Ship } from '../src/ship'
+import { Player } from '../src/player'
 
 test("You've sunk my battleship (ships register hits)", () => {
   const testBoard = new Gameboard()

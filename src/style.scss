@@ -67,7 +67,8 @@ footer {
   width: 100%;
 }
 
-.cell {
+.playerCell,
+.computerCell {
   border: 1px solid black;
   flex: 0 9%;
   width: 30px;
@@ -76,11 +77,18 @@ footer {
   border-radius: 2px;
 }
 
-.cell:hover {
+.playerCell:hover,
+.computerCell:hover {
   transform: scale(1.1);
   cursor: pointer;
 }
 
-.cell[data-been-hit='true'] {
+.playerCell[data-been-hit='true'],
+.computerCell[data-been-hit='true'] {
   background-color: rgb(190, 189, 189);
+}
+
+.playerCell[data-been-hit !='null'],
+.computerCell[data-been-hit !='null'] {
+  background-color: rgb(255, 0, 0);
 }

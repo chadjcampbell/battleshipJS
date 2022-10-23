@@ -12,7 +12,7 @@ const computerDisplay = document.querySelector('#computerdisplay')
 function renderPlayerBoard() {
   playerBoard.gameBoard.forEach((cell) => {
     const cellDiv = document.createElement('div')
-    cellDiv.classList.add('cell')
+    cellDiv.classList.add('playerCell')
     cellDiv.dataset.x = cell.x
     cellDiv.dataset.y = cell.y
     cellDiv.dataset.occupied = cell.occupied
@@ -23,21 +23,37 @@ function renderPlayerBoard() {
 
 renderPlayerBoard()
 
-computerBoard.gameBoard.forEach((cell) => {
-  const cellDiv = document.createElement('div')
-  cellDiv.classList.add('cell')
-  cellDiv.dataset.x = cell.x
-  cellDiv.dataset.y = cell.y
-  cellDiv.dataset.occupied = cell.occupied
-  cellDiv.dataset.beenHit = cell.beenHit
-  computerDisplay.appendChild(cellDiv)
-})
+function renderComputerBoard() {
+  computerBoard.gameBoard.forEach((cell) => {
+    const cellDiv = document.createElement('div')
+    cellDiv.classList.add('computerCell')
+    cellDiv.dataset.x = cell.x
+    cellDiv.dataset.y = cell.y
+    cellDiv.dataset.occupied = cell.occupied
+    cellDiv.dataset.beenHit = cell.beenHit
+    computerDisplay.appendChild(cellDiv)
+  })
+}
 
-const playerBoardCells = document.querySelectorAll('.cell')
+renderComputerBoard()
+
+const playerBoardCells = document.querySelectorAll('.playerCell')
 
 playerBoardCells.forEach((cellDiv) => {
   cellDiv.addEventListener('click', () => {
     playerBoard.receiveAttack([
+      Number(cellDiv.dataset.x),
+      Number(cellDiv.dataset.y),
+    ])
+    updateCell(cellDiv)
+  })
+})
+
+const computerBoardCells = document.querySelectorAll('.computerCell')
+
+computerBoardCells.forEach((cellDiv) => {
+  cellDiv.addEventListener('click', () => {
+    computerBoard.receiveAttack([
       Number(cellDiv.dataset.x),
       Number(cellDiv.dataset.y),
     ])

@@ -83,6 +83,36 @@ class Gameboard {
     }
     return false
   }
+  randomPlacement() {
+    let fleet = [
+      this.carrier,
+      this.battleship,
+      this.destroyer,
+      this.submarine,
+      this.patrolBoat,
+    ]
+    let binder = this
+    function tryPlacement(fleet) {
+      if (fleet.length === 0) return
+      let randomCell = binder.findCell(binder.randomXY())
+      console.log([randomCell.x, randomCell.y])
+      console.log(binder.validPlacement([randomCell.x, randomCell.y], fleet[0]))
+      if (binder.validPlacement([randomCell.x, randomCell.y], fleet[0])) {
+        console.log([randomCell.x, randomCell.y])
+        binder.placeShip([randomCell.x, randomCell.y], fleet[0])
+        fleet.shift()
+        tryPlacement(fleet)
+      } else {
+        tryPlacement(fleet)
+      }
+    }
+    tryPlacement(fleet)
+  }
+  randomXY(min = 0, max = 9) {
+    const randomX = Math.floor(Math.random() * (max - min + 1) + min)
+    const randomY = Math.floor(Math.random() * (max - min + 1) + min)
+    return [randomX, randomY]
+  }
 }
 
 class Player {
@@ -109,13 +139,10 @@ class Player {
 
 const testPlayer = new Player()
 const testBoard = new Gameboard()
-testBoard.placeShip([1, 1], testBoard.carrier)
-testBoard.placeShip([1, 2], testBoard.battleship)
-testBoard.placeShip([1, 3], testBoard.destroyer)
-testBoard.placeShip([1, 4], testBoard.submarine)
-testBoard.placeShip([1, 5], testBoard.patrolBoat)
+testBoard.randomPlacement()
 for (let i = 0; i < 100; i++) {
   testPlayer.randomAttack(testBoard)
 }
 
 console.log(testBoard)
+console.log(testBoard.fleetSunk())

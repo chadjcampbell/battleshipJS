@@ -88,7 +88,7 @@ footer {
   background-color: rgb(190, 189, 189);
 }
 
-.playerCell[data-been-hit !='null'],
-.computerCell[data-been-hit !='null'] {
+.playerCell[data-occupied='[object Object]'],
+.computerCell[data-occupied='[object Object]'] {
   background-color: rgb(255, 0, 0);
 }

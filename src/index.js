@@ -9,6 +9,9 @@ const playerDisplay = document.querySelector('#playerdisplay')
 const computerBoard = new Gameboard()
 const computerDisplay = document.querySelector('#computerdisplay')
 
+playerBoard.randomPlacement()
+computerBoard.randomPlacement()
+
 function renderPlayerBoard() {
   playerBoard.gameBoard.forEach((cell) => {
     const cellDiv = document.createElement('div')

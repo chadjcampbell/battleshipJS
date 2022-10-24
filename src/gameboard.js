@@ -72,7 +72,26 @@ class Gameboard {
     return false
   }
   randomPlacement() {
-    //TODO
+    let fleet = [
+      this.carrier,
+      this.battleship,
+      this.destroyer,
+      this.submarine,
+      this.patrolBoat,
+    ]
+    let binder = this
+    function tryPlacement(fleet) {
+      if (fleet.length === 0) return
+      let randomCell = binder.findCell(binder.randomXY())
+      if (binder.validPlacement([randomCell.x, randomCell.y], fleet[0])) {
+        binder.placeShip([randomCell.x, randomCell.y], fleet[0])
+        fleet.shift()
+        tryPlacement(fleet)
+      } else {
+        tryPlacement(fleet)
+      }
+    }
+    tryPlacement(fleet)
   }
   randomXY(min = 0, max = 9) {
     const randomX = Math.floor(Math.random() * (max - min + 1) + min)

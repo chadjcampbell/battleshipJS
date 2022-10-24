@@ -78,7 +78,8 @@ footer {
 }
 
 .playerCell:hover,
-.computerCell:hover {
+.computerCell:hover,
+button:hover {
   transform: scale(1.1);
   cursor: pointer;
 }
@@ -88,7 +89,35 @@ footer {
   background-color: rgb(190, 189, 189);
 }
 
-.playerCell[data-occupied='[object Object]'],
-.computerCell[data-occupied='[object Object]'] {
+.playerCell[data-occupied='[object Object]'] {
   background-color: rgb(255, 0, 0);
+}
+
+.playerCell[data-been-hit='true'].playerCell[data-occupied='[object Object]'],
+.computerCell[data-been-hit='true'].computerCell[data-occupied='[object Object]'] {
+  background-color: black;
+}
+
+#buttons {
+  background-color: #fef6e4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+button {
+  background-color: #00a71c;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-bottom: 20px;
+  border: 1px solid black;
+  border-radius: 5px;
+  box-shadow: 0px 0px 9px 5px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
 }

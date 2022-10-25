@@ -29,24 +29,46 @@ class Gameboard {
     return gameBoard
   }
   placeShip(coordinates, ship) {
-    if (this.validPlacement(coordinates, ship)) {
-      for (let i = 0; i < ship.length; i++) {
-        let tempCoords = [coordinates[0] + i, coordinates[1]]
-        this.findCell(tempCoords).occupied = ship
+    if (ship.orientation == 'vertical') {
+      if (this.validPlacement(coordinates, ship)) {
+        for (let i = 0; i < ship.length; i++) {
+          let tempCoords = [coordinates[0] + i, coordinates[1]]
+          this.findCell(tempCoords).occupied = ship
+        }
+      }
+    } else {
+      if (this.validPlacement(coordinates, ship)) {
+        for (let i = 0; i < ship.length; i++) {
+          let tempCoords = [coordinates[0], coordinates[1] + i]
+          this.findCell(tempCoords).occupied = ship
+        }
       }
     }
   }
   validPlacement(coordinates, ship) {
-    for (let i = 0; i < ship.length; i++) {
-      let tempCoords = [coordinates[0] + i, coordinates[1]]
-      if (
-        this.findCell(tempCoords) == undefined ||
-        this.findCell(tempCoords).occupied !== null
-      ) {
-        return false
+    if (ship.orientation == 'vertical') {
+      for (let i = 0; i < ship.length; i++) {
+        let tempCoords = [coordinates[0] + i, coordinates[1]]
+        if (
+          this.findCell(tempCoords) == undefined ||
+          this.findCell(tempCoords).occupied !== null
+        ) {
+          return false
+        }
       }
+      return true
+    } else {
+      for (let i = 0; i < ship.length; i++) {
+        let tempCoords = [coordinates[0], coordinates[1] + i]
+        if (
+          this.findCell(tempCoords) == undefined ||
+          this.findCell(tempCoords).occupied !== null
+        ) {
+          return false
+        }
+      }
+      return true
     }
-    return true
   }
   findCell(coordinates) {
     return this.gameBoard.find(

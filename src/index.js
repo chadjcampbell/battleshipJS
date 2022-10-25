@@ -27,6 +27,11 @@ function renderPlayerBoard() {
 
 renderPlayerBoard()
 
+//Clone player board for manual placement popup
+const playerDisplayClone = playerDisplay.cloneNode(true)
+const popup = document.querySelector('#popup')
+popup.appendChild(playerDisplayClone)
+
 function renderComputerBoard() {
   computerDisplay.innerHTML = ''
   computerBoard.gameBoard.forEach((cell) => {

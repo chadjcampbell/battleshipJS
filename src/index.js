@@ -9,7 +9,6 @@ const computerBoard = new Gameboard()
 const computerDisplay = document.querySelector('#computerdisplay')
 const computerAI = new Player()
 
-playerBoard.randomPlacement()
 computerBoard.randomPlacement()
 
 function renderPlayerBoard() {
@@ -26,11 +25,6 @@ function renderPlayerBoard() {
 }
 
 renderPlayerBoard()
-
-//Clone player board for manual placement popup
-const playerDisplayClone = playerDisplay.cloneNode(true)
-const popup = document.querySelector('#popup')
-popup.appendChild(playerDisplayClone)
 
 function renderComputerBoard() {
   computerDisplay.innerHTML = ''
@@ -76,3 +70,19 @@ function gameLoop() {
 }
 
 playerTurn()
+
+//Clone player board for manual placement popup
+const playerDisplayClone = playerDisplay.cloneNode(true)
+const popup = document.querySelector('#popup')
+popup.appendChild(playerDisplayClone)
+
+//Manual placement popup listeners
+const randomButton = document.querySelector('#randomButton')
+randomButton.addEventListener('click', playerBoard.randomPlacement())
+const startButton = document.querySelector('#startButton')
+startButton.addEventListener('click', () => {
+  if (playerBoard.fleetPlaced()) {
+  } else {
+    alert('You must place all your ships!')
+  }
+})

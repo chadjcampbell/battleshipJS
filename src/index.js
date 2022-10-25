@@ -72,7 +72,7 @@ function gameLoop() {
 playerTurn()
 
 //Clone player board for manual placement popup
-const playerDisplayClone = playerDisplay.cloneNode(true)
+let playerDisplayClone = playerDisplay.cloneNode(true)
 const popup = document.querySelector('#popup')
 popup.appendChild(playerDisplayClone)
 
@@ -82,6 +82,9 @@ randomButton.addEventListener('click', () => {
   playerBoard.gameBoard = playerBoard.makeGameboard()
   playerBoard.randomPlacement()
   renderPlayerBoard()
+  playerDisplayClone.innerHTML = ''
+  playerDisplayClone = playerDisplay.cloneNode(true)
+  popup.appendChild(playerDisplayClone)
 })
 const startButton = document.querySelector('#startButton')
 startButton.addEventListener('click', () => {

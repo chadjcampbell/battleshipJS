@@ -78,10 +78,15 @@ popup.appendChild(playerDisplayClone)
 
 //Manual placement popup listeners
 const randomButton = document.querySelector('#randomButton')
-randomButton.addEventListener('click', playerBoard.randomPlacement())
+randomButton.addEventListener('click', () => {
+  playerBoard.gameBoard = playerBoard.makeGameboard()
+  playerBoard.randomPlacement()
+  renderPlayerBoard()
+})
 const startButton = document.querySelector('#startButton')
 startButton.addEventListener('click', () => {
   if (playerBoard.fleetPlaced()) {
+    popup.style.display = 'none'
   } else {
     alert('You must place all your ships!')
   }

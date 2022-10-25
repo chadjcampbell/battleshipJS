@@ -120,6 +120,19 @@ class Gameboard {
     const randomY = Math.floor(Math.random() * (max - min + 1) + min)
     return [randomX, randomY]
   }
+  fleetPlaced() {
+    let counter = 0
+    for (let i = 0; i < this.gameBoard.length; i++) {
+      if (this.gameBoard[i].occupied !== null) {
+        counter++
+      }
+    }
+    if (counter == 17) {
+      return true
+    } else {
+      return false
+    }
+  }
 }
 
 export { Gameboard }

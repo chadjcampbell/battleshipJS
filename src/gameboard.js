@@ -133,6 +133,21 @@ class Gameboard {
       return false
     }
   }
+  manualPlacement(div) {
+    let fleet = [
+      this.carrier,
+      this.battleship,
+      this.destroyer,
+      this.submarine,
+      this.patrolBoat,
+    ]
+    let binder = this
+    function manualPlacementEach(fleet) {
+      if (fleet.length === 0) return
+      //TODO
+    }
+    this.manualPlacementEach(fleet)
+  }
 }
 
 export { Gameboard }

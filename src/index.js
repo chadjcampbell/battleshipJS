@@ -85,6 +85,7 @@ randomButton.addEventListener('click', () => {
   playerDisplayClone.innerHTML = ''
   playerDisplayClone = playerDisplay.cloneNode(true)
   popup.appendChild(playerDisplayClone)
+  popup.appendChild(manualButton)
 })
 const startButton = document.querySelector('#startButton')
 startButton.addEventListener('click', () => {
@@ -94,3 +95,9 @@ startButton.addEventListener('click', () => {
     alert('You must place all your ships!')
   }
 })
+
+const manualButton = document.createElement('button')
+manualButton.innerHTML = ''
+manualButton.id = 'manualButton'
+manualButton.textContent = 'Manual Ship Placement'
+popup.appendChild(manualButton)

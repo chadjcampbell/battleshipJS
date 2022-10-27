@@ -125,28 +125,44 @@ let playerBoardFleetNames = [
   'Patrol Boat',
 ]
 
-manualButton.addEventListener('click', () => {
-  randomButton.style.display = 'none'
-  manualPlacementDisplay.textContent = playerBoardFleetNames[0]
-  let ship = playerBoardFleet[0]
-  let playerBoardCells = document.querySelectorAll('.playerCell')
-  playerBoardCells.forEach((cellDiv) => {
-    cellDiv.addEventListener('click', () => {
-      playerBoard.placeShip(
-        [Number(cellDiv.dataset.x), Number(cellDiv.dataset.y)],
-        ship
-      )
-      renderPlayerBoard()
-      playerDisplayClone.innerHTML = ''
-      playerDisplayClone = playerDisplay.cloneNode(true)
-      popup.appendChild(playerDisplayClone)
-      popup.appendChild(manualButton)
-      playerBoardFleetNames.shift()
-      playerBoardFleet.shift()
-      manualButton.textContent = `Next Up: ${playerBoardFleetNames[0]}`
-      if (playerBoardFleetNames.length == 0) {
-        manualButton.style.display = 'none'
-      }
+function manualShipCycle() {
+  manualButton.addEventListener('click', () => {
+    randomButton.style.display = 'none'
+    manualPlacementDisplay.textContent = `Place your ${playerBoardFleetNames[0]}`
+    let ship = playerBoardFleet[0]
+    let playerBoardCells = document.querySelectorAll('.playerCell')
+    playerBoardCells.forEach((cellDiv) => {
+      cellDiv.addEventListener('click', () => {
+        if (
+          !playerBoard.validPlacement(
+            [Number(cellDiv.dataset.x), Number(cellDiv.dataset.y)],
+            ship
+          )
+        ) {
+          manualPlacementDisplay.textContent = 'Invalid placement, try again'
+          setTimeout(() => {
+            manualPlacementDisplay.textContent = `Place your ${playerBoardFleetNames[0]}`
+          }, 1000)
+          return
+        }
+        playerBoard.placeShip(
+          [Number(cellDiv.dataset.x), Number(cellDiv.dataset.y)],
+          ship
+        )
+        renderPlayerBoard()
+        playerDisplayClone.innerHTML = ''
+        playerDisplayClone = playerDisplay.cloneNode(true)
+        popup.appendChild(playerDisplayClone)
+        popup.appendChild(manualButton)
+        playerBoardFleetNames.shift()
+        playerBoardFleet.shift()
+        manualButton.textContent = `Next Up: ${playerBoardFleetNames[0]}`
+        if (playerBoardFleetNames.length == 0) {
+          manualButton.style.display = 'none'
+          manualPlacementDisplay.textContent = 'Ready to start!'
+        }
+      })
     })
   })
-})
+}
+manualShipCycle()

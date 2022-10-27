@@ -71,14 +71,20 @@ function gameLoop() {
 
 playerTurn()
 
-//Clone player board for manual placement popup
+//Ship names for manual placement
+let manualPlacementDisplay = document.createElement('div')
+manualPlacementDisplay.id = 'manualPlacementDisplay'
+
+//Clone player board for placement popup
 let playerDisplayClone = playerDisplay.cloneNode(true)
 const popup = document.querySelector('#popup')
+popup.appendChild(manualPlacementDisplay)
 popup.appendChild(playerDisplayClone)
 
-//Manual placement popup listeners
+//Popup div button listeners
 const randomButton = document.querySelector('#randomButton')
 randomButton.addEventListener('click', () => {
+  manualButton.style.display = 'none'
   playerBoard.gameBoard = playerBoard.makeGameboard()
   playerBoard.randomPlacement()
   renderPlayerBoard()
@@ -96,8 +102,51 @@ startButton.addEventListener('click', () => {
   }
 })
 
+//Button and arrays to cycle through manual ship placement
 const manualButton = document.createElement('button')
 manualButton.innerHTML = ''
 manualButton.id = 'manualButton'
 manualButton.textContent = 'Manual Ship Placement'
 popup.appendChild(manualButton)
+
+let playerBoardFleet = [
+  playerBoard.carrier,
+  playerBoard.battleship,
+  playerBoard.destroyer,
+  playerBoard.submarine,
+  playerBoard.patrolBoat,
+]
+
+let playerBoardFleetNames = [
+  'Carrier',
+  'Battleship',
+  'Destroyer',
+  'Submarine',
+  'Patrol Boat',
+]
+
+manualButton.addEventListener('click', () => {
+  randomButton.style.display = 'none'
+  manualPlacementDisplay.textContent = playerBoardFleetNames[0]
+  let ship = playerBoardFleet[0]
+  let playerBoardCells = document.querySelectorAll('.playerCell')
+  playerBoardCells.forEach((cellDiv) => {
+    cellDiv.addEventListener('click', () => {
+      playerBoard.placeShip(
+        [Number(cellDiv.dataset.x), Number(cellDiv.dataset.y)],
+        ship
+      )
+      renderPlayerBoard()
+      playerDisplayClone.innerHTML = ''
+      playerDisplayClone = playerDisplay.cloneNode(true)
+      popup.appendChild(playerDisplayClone)
+      popup.appendChild(manualButton)
+      playerBoardFleetNames.shift()
+      playerBoardFleet.shift()
+      manualButton.textContent = `Next Up: ${playerBoardFleetNames[0]}`
+      if (playerBoardFleetNames.length == 0) {
+        manualButton.style.display = 'none'
+      }
+    })
+  })
+})

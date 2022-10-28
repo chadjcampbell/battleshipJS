@@ -150,6 +150,7 @@ function manualShipCycle() {
     let playerBoardCells = document.querySelectorAll('.playerCell')
     playerBoardCells.forEach((cellDiv) => {
       cellDiv.addEventListener('click', () => {
+        ship.orientation = getOrientation()
         if (
           !playerBoard.validPlacement(
             [Number(cellDiv.dataset.x), Number(cellDiv.dataset.y)],
@@ -177,6 +178,7 @@ function manualShipCycle() {
         if (playerBoardFleetNames.length == 0) {
           manualButton.style.display = 'none'
           manualPlacementDisplay.textContent = 'Ready to start!'
+          orientationToggle.style.display = 'none'
         }
       })
     })

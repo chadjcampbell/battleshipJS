@@ -75,6 +75,8 @@ playerTurn()
 let manualPlacementDisplay = document.createElement('div')
 manualPlacementDisplay.id = 'manualPlacementDisplay'
 
+//Toggle switch for ship orientation
+
 //Clone player board for placement popup
 let playerDisplayClone = playerDisplay.cloneNode(true)
 const popup = document.querySelector('#popup')

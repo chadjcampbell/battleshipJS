@@ -78,8 +78,6 @@ manualPlacementDisplay.id = 'manualPlacementDisplay'
 //Toggle switch for ship orientation
 const orientationToggle = document.querySelector('#orientationToggle')
 const orientationInput = document.querySelector('#orientationInput')
-const vertical = document.querySelector('#vertical')
-const horizontal = document.querySelector('#horizontal')
 function getOrientation() {
   let orientation
   if (orientationInput.checked) {

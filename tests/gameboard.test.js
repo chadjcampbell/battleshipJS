@@ -24,3 +24,10 @@ test("You've sunk all my ships and won the game! (testing fleetSunk)", () => {
   }
   expect(testBoard.fleetSunk()).toBe(true)
 })
+
+test('Can ships all be randomly placed, and check if all are placed?', () => {
+  const testBoard = new Gameboard()
+  expect(testBoard.fleetPlaced()).toBe(false)
+  testBoard.randomPlacement()
+  expect(testBoard.fleetPlaced()).toBe(true)
+})

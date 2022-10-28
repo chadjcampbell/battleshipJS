@@ -6,6 +6,7 @@ const testPlayer = new Player()
 const testBoard = new Gameboard()
 const testShip = new Ship(3)
 
+//This tests both Player class methods
 test('100 random attacks, all cells hit?', () => {
   testBoard.placeShip([1, 4], testShip)
   for (let i = 0; i < 100; i++) {

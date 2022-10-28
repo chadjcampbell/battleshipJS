@@ -76,6 +76,20 @@ let manualPlacementDisplay = document.createElement('div')
 manualPlacementDisplay.id = 'manualPlacementDisplay'
 
 //Toggle switch for ship orientation
+const orientationToggle = document.querySelector('#orientationToggle')
+const orientationInput = document.querySelector('#orientationInput')
+const vertical = document.querySelector('#vertical')
+const horizontal = document.querySelector('#horizontal')
+function getOrientation() {
+  let orientation
+  if (orientationInput.checked) {
+    orientation = 'horizontal'
+  } else {
+    orientation = 'vertical'
+  }
+  return orientation
+}
+orientationToggle.style.display = 'none'
 
 //Clone player board for placement popup
 let playerDisplayClone = playerDisplay.cloneNode(true)
@@ -129,6 +143,7 @@ let playerBoardFleetNames = [
 
 function manualShipCycle() {
   manualButton.addEventListener('click', () => {
+    orientationToggle.style.display = 'flex'
     randomButton.style.display = 'none'
     manualPlacementDisplay.textContent = `Place your ${playerBoardFleetNames[0]}`
     let ship = playerBoardFleet[0]
